@@ -1,0 +1,60 @@
+<main>
+    <h1>Ver Pedidos</h1>
+
+        <section class="filtrado">
+            <fieldset>
+                <label for="filtro-cliente">Filtrar por Cliente</label>
+                <input type="text" id="filtro-cliente" [(ngModel)]="filtroCliente">
+            </fieldset>
+
+            <fieldset>
+                <label for="filtro-estado">Filtrar por Estado</label>
+                <select id="filtro-estado" [(ngModel)]="filtroEstado">
+                    <option value="">Sin Filtro</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="entregado">Entregado</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </fieldset>
+        </section>
+
+        <section class="ordenamiento">
+           <fieldset>
+                <label for="orden-cliente">Ordenar por cliente</label>
+                <select id="orden-cliente" [(ngModel)]="ordenCliente">
+                    <option value="">Sin Orden</option>
+                    <option value="asc">Ascendiente</option>
+                    <option value="desc">Descendiente</option>
+                </select>
+           </fieldset>
+
+            <fieldset>
+                <label for="orden-total">Ordenar por Importe Total</label>
+                <select id="orden-total" [(ngModel)]="ordenTotal">
+                    <option value="">Sin Orden</option>
+                    <option value="asc">Ascendiente</option>
+                    <option value="desc">Descendiente</option>
+                </select>
+            </fieldset>
+        </section>
+
+    @if (pedidos.length > 0) {
+        <ul>
+            @for (pedido of filtrarYOrdenar(); track $index) {
+                <li class="tarjeta">
+                    <h3> {{pedido.plato}} </h3>
+                    <h5> {{pedido.cliente}} </h5>
+                    <h5> {{pedido.precioUnitario * pedido.cantidad}} </h5>
+                </li>
+
+                <section class="acciones">
+                    <button class="eliminar" (click)="eliminar(pedido.id!)">Eliminar</button>
+                    <button class="editar" (click)="editar(pedido.id!)">Editar</button>
+                    <button class="detalles" (click)="verDetalles(pedido.id!)">Detalles</button>
+                </section>
+            }   
+        </ul>
+    } @else {
+        <h1>No hay pedidos cargados</h1>
+    }
+</main>

@@ -1,0 +1,14 @@
+<main>
+    <section>
+        <h5>ID: {{pedido.id}} </h5>
+        <h5>Cliente: {{pedido.cliente}} </h5>
+        <h5>Plato: {{pedido.plato}} </h5>
+        <h5>Precio Unitario: {{pedido.precioUnitario}} </h5>
+        <h5>Cantidad: {{pedido.cantidad}} </h5>
+        <h5>Importe Total: {{pedido.precioUnitario * pedido.cantidad}} </h5>
+        <h5>Estado: {{pedido.estado}} </h5>
+        <h5>Fecha: {{pedido.fecha}} </h5>
+    </section>
+
+    <button (click)="volver()">Volver</button>
+</main>

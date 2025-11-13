@@ -1,0 +1,84 @@
+<form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+    <fieldset>
+        <label for="cliente">Cliente</label>
+        <input type="text" id="cliente" formControlName="cliente">
+
+        @if (controles['cliente'].touched) {
+            @if (controles['cliente'].hasError('required')) {
+                <h5>El nombre del cliente es obligatorio</h5>
+            }@else if (controles['cliente'].hasError('minlength')) {
+                <h5>el nombre del cliente debe tener por lo menos 3 caracteres</h5>
+            }
+        }
+    </fieldset>
+
+    <fieldset>
+        <label for="plato">Plato</label>
+        <input type="text" id="plato" formControlName="plato">
+
+        @if (controles['plato'].touched) {
+            @if (controles['plato'].hasError('required')) {
+                <h5>El nombre del plato es obligatorio</h5>
+            }@else if (controles['plato'].hasError('minlength')) {
+                <h5>el nombre del plato debe tener por lo menos 4 caracteres</h5>
+            }@else if(controles['plato'].hasError('maxlength')) {
+                <h5>El nombre del plato debe tener como maximo 20 caracteres</h5>
+            }
+        }
+    </fieldset>
+
+    <fieldset>
+        <label for="cantidad">Cantidad</label>
+        <input type="number" id="cantidad" formControlName="cantidad">
+
+        @if (controles['cantidad'].touched) {
+            @if (controles['cantidad'].hasError('required')) {
+                <h5>La cantidad es obligatoria</h5>
+            } @else if (controles['cantidad'].hasError('pattern')) {
+                <h5>La cantidad debe ser numerica</h5>
+            }@else if (controles['cantidad'].hasError('min')) {
+                <h5>LA cantidad debe ser mayor a 0</h5>
+            }
+        }
+    </fieldset>
+
+    <fieldset>
+        <label for="precio-unitario">Precio Unitario</label>
+        <input type="number" id="precio-unitario" formControlName="precioUnitario">
+
+        @if (controles['precioUnitario'].touched) {
+            @if (controles['precioUnitario'].hasError('required')) {
+                <h5>El precio unitario es obligatorio</h5>
+            } @else if (controles['precioUnitario'].hasError('pattern')) {
+                <h5>El precio unitario debe ser numerico</h5>
+            }@else if (controles['precioUnitario'].hasError('min')) {
+                <h5>El precio unitario debe ser mayor a 0</h5>
+            }
+        }
+    </fieldset>
+
+    <fieldset>
+        <label for="estado">Estado</label>
+        <select id="estado" formControlName="estado">
+            <option value="">Elegi un estado</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="entregado">Entregado</option>
+            <option value="cancelado">Cancelado</option>
+        </select>
+
+        @if (controles['estado'].touched && controles['estado'].hasError('required')) {
+            <h5>El estado es obligatorio</h5>
+        }
+    </fieldset>
+
+    <fieldset>
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" formControlName="fecha">
+
+        @if (controles['fecha'].touched && controles['fecha'].hasError('required')) {
+            <h5>LA fecha es  obligatoria</h5>
+        }
+    </fieldset>
+
+    <input type="submit" class="enviar" value="Enviar" [disabled]="formulario.invalid">
+</form>
